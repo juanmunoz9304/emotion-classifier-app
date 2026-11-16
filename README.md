@@ -13,3 +13,9 @@ That means, Backend in FastAPI builds the request for Custom Vision, handles the
 and does a really simple formatting on the retrieved information about image classifying. Then, an
 Angular APP, which serves as a web application handles the user requests only making lineal communication. No direct use of the Custom Vision API and error handling only using project structure.
 
+---
+
+#### About the backend
+
+Backend was built using FastAPI + Uvicorn. The main purpose of this backend is to: Embed custom vision, 
+generates own requests and responses and serve Angular Application.
