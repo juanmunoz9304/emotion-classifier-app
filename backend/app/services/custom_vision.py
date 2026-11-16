@@ -7,7 +7,6 @@ from app.schemas.emotion import EmotionScore, PredictionResponse
 async def classify_facial_emotion(
     image_bytes: bytes,
     filename: str,
-    confidence_threshold: float = 50.0,
 ) -> PredictionResponse:
     headers = {
         "Prediction-Key": settings.azure_prediction_key,
@@ -31,6 +30,8 @@ async def classify_facial_emotion(
     if not raw_predictions:
         raise HTTPException(status_code=502, detail="Azure no devolvió predicciones.")
 
+    # So, the main idea is to get the top confidence, but I removed if its confident by querying the threshold
+    # I would like to get only the top
     ranked = sorted(
         [
             EmotionScore(
@@ -48,6 +49,5 @@ async def classify_facial_emotion(
         filename=filename,
         top_emotion=top.emotion,
         top_confidence=top.confidence,
-        is_confident=top.confidence >= confidence_threshold,
         predictions=ranked,
     )

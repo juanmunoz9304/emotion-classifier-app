@@ -10,5 +10,4 @@ class PredictionResponse(BaseModel):
     filename: str
     top_emotion: str
     top_confidence: float
-    is_confident: bool
     predictions: list[EmotionScore]

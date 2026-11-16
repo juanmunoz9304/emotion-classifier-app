@@ -10,6 +10,7 @@ app = FastAPI(title="Facial Emotion Recognition API", version="1.0.0")
 
 origins = [o.strip() for o in settings.allowed_origins.split(",") if o.strip()]
 
+# I would like to add as a monorepo a front origin in the same container
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
