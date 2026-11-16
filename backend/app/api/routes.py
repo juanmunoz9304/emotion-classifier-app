@@ -21,7 +21,6 @@ async def list_emotions():
 @router.post("/predict", response_model=PredictionResponse)
 async def predict_emotion(
     file: UploadFile = File(...),
-    threshold: float = Query(default=50.0, ge=0.0, le=100.0),
 ):
     if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="El archivo debe ser una imagen válida.")
@@ -36,5 +35,4 @@ async def predict_emotion(
     return await classify_facial_emotion(
         image_bytes=image_bytes,
         filename=file.filename or "upload.jpg",
-        confidence_threshold=threshold,
     )
